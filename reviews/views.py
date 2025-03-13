@@ -104,17 +104,18 @@ def book_detail(request, pk):
     reviews = book.review_set.all()
     if reviews:
         book_rating = average_rating([review.rating for review in reviews])
-        context = {
-            "book": book,
-            "book_rating": book_rating,
-            "reviews": reviews
-        }
+        context = {"book": book, "book_rating": book_rating, "reviews": reviews}
     else:
-        context = {
-            "book": book,
-            "book_rating": None,
-            "reviews": None
-        }
+        context = {"book": book, "book_rating": None, "reviews": None}
+    if request.user.is_authenticated:
+        max_viewed_books_length = 10
+        viewed_books = request.session.get("viewed_books", [])
+        viewed_book = [book.id, book.title]
+        if viewed_book in viewed_books:
+            viewed_books.pop(viewed_books.index(viewed_book))
+        viewed_books.insert(0, viewed_book)
+        viewed_books = viewed_books[:max_viewed_books_length]
+        request.session["viewed_books"] = viewed_books
     return render(request, "reviews/book_detail.html", context)
 
 @login_required
