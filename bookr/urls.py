@@ -19,9 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from .views import profile
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('reviews.urls')),
+    path('accounts/profile/', profile, name='profile'),
     path("accounts/", include(("django.contrib.auth.urls", "auth"), namespace="accounts")),
     path("accounts/password_reset/done/", auth.views.PasswordResetDoneView.as_view(), name="password_reset_done",),
     path("accounts/reset/done/",  auth.views.PasswordResetCompleteView.as_view(), name="password_reset_complete",),
