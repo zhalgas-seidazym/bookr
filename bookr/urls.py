@@ -20,9 +20,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from .views import profile
+from bookr_admin.admin import admin_site
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),
     path('', include('reviews.urls')),
     path('accounts/profile/', profile, name='profile'),
     path("accounts/", include(("django.contrib.auth.urls", "auth"), namespace="accounts")),
