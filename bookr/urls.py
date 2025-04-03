@@ -24,7 +24,10 @@ from .views import profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', include('reviews.urls')),
+    path('filter_demo/', include('filter_demo.urls')),
+
     path('accounts/profile/', profile, name='profile'),
     path("accounts/", include(("django.contrib.auth.urls", "auth"), namespace="accounts")),
     path("accounts/password_reset/done/", auth.views.PasswordResetDoneView.as_view(), name="password_reset_done",),

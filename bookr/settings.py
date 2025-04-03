@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'reviews',
-    'bookr_admin'
+    'bookr_admin',
+    'filter_demo'
 ]
 
 MIDDLEWARE = [
